@@ -1,10 +1,10 @@
 // This file allows us to seed our application with data
 // simply run: `node seed.js` from the root of this project folder.
 
-var db = require("./models");
 
-// var albumList =[];
-//
+
+var albumList =[];
+
 // albumList.push({
 //               artistName: 'Nine Inch Nails',
 //               name: 'The Downward Spiral',
@@ -30,6 +30,7 @@ var db = require("./models");
 //               genres: [ 'country', 'rock' ]
 //             });
 
+var db = require("./models");
 
 db.Album.remove({}, function(err, albums){
 

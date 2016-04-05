@@ -45,6 +45,7 @@ function index(req, res) {
   });
 }
 
+//POST /api/albums
 function create(req, res) {
   console.log('body', req.body);
   // FILL ME IN !
@@ -53,10 +54,11 @@ function create(req, res) {
   req.body.genres = genres;
 
   db.Album.create(req.body, function(err, album) {
-    if (err) { console.log('error', err); }
+    if (err) { console.log("create error: ", err); }
     console.log(album);
     res.json(album);
   });
+
   //Matt
   // console.log("album created", req.body);
   // var newAlbum = new db.Album(req.body);

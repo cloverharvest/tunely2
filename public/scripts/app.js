@@ -42,22 +42,20 @@ $(document).ready(function() {
         renderAlbum(album);
       });
     });
-});
 
-//this function capture the form values and serializes them, then
-//console.log the data collected from the form submitted
-//clear the form after getting the data
-//form class form horizontal
-$('#album-form form').on('submit', function(evt) {
-  evt.preventDefault();
-  var formData = $(this).serialize();
-  console.log('formData', formData);
-  //post from app.js
-  $.post('/api/albums', formData, function(album) {
-      console.log('album after POST', album);
-      renderAlbum(album); ///renders to web page (did db save it)
+    $('#album-form form').on('submit', function(evt) {
+      evt.preventDefault();
+      var formData = $(this).serialize();
+      console.log('formData', formData);
+      $.ajax({
+        method: 'POST',
+        url: '/api/albums',
+        data: formData,
+        success: newAlbumSuccess,
+        error: newAlbumError,
+      });
+      $(this).trigger("reset");
     });
-  $(this).trigger("reset");
 });
 
 // this function takes a single album and renders it to the page
@@ -67,4 +65,13 @@ function renderAlbum(album) {
   var albumsTemplate = Handlebars.compile(albumHtml);
   var html = albumsTemplate({album: album});
   $('#albums').prepend(html);
+}
+
+function newAlbumSuccess(album) {
+  console.log('album after POST', album);
+  renderAlbum(album);
+}
+
+function newAlbumError(album) {
+  console.log("Sorry, wasn't able to add the new album.");
 }

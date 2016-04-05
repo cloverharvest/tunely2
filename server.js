@@ -6,11 +6,11 @@ var express = require('express'),
    app = express(),
    bodyParser = require('body-parser');
 
-//configure body parser for receiving form data
-app.use(bodyParser.urlencoded({ extended: true }));
-
 // serve static files from public folder
 app.use(express.static(__dirname + '/public'));
+
+//configure body parser for receiving form data
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // We'll serve jQuery and bootstrap from a local bower cache avoiding CDNs
 // We're placing these under /vendor to differentiate them from our own assets
