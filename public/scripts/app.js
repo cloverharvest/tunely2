@@ -34,7 +34,7 @@
 //            });
 /* end of hard-coded data */
 
-
+//
 $(document).ready(function() {
   console.log('app.js loaded!');
     $.get('/api/albums').success(function (albums) {
@@ -42,6 +42,17 @@ $(document).ready(function() {
         renderAlbum(album);
       });
     });
+});
+
+//this function capture the form values and serializes them
+//console.log the data collected from the form submitted
+//clear the form after getting the data
+
+$('#album-form').on('submit', function(evt) {
+  evt.preventDefault();
+  var formData = $(this).serialize();
+  console.log('formData', formData);
+  $(this).trigger("reset");
 });
 
 // this function takes a single album and renders it to the page
