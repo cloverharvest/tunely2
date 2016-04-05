@@ -35,18 +35,21 @@ sampleAlbums.push({
 /* end of hard-coded data */
 
 
-
-
 $(document).ready(function() {
   console.log('app.js loaded!');
+  renderAlbum(sampleAlbums[0]);
+  // $.get('/api/albums').success(function (albums) {
+  //   albums.forEach(function(album) {
+  //     renderAlbum(album);
+  //   });
+  // });
 });
-
-
-
-
 
 // this function takes a single album and renders it to the page
 function renderAlbum(album) {
   console.log('rendering album:', album);
-
+  var albumHtml = $('#albums-template').html();
+  var albumsTemplate = Handlebars.compile(albumHtml);
+  var html = albumsTemplate({album : album});
+  $('#albums').prepend(html);
 }
