@@ -39,14 +39,32 @@ var db = require('../models');
 function index(req, res) {
   db.Album.find({}, function(err, albums) {
     if(err) {
-      return console.log("index error: " + error);
+      return console.log("index error: " + err);
     }
     res.json(albums);
   });
 }
 
 function create(req, res) {
+  console.log('body', req.body);
   // FILL ME IN !
+  // split at comma and remove trailing space
+  var genres = req.body.genres.split(',').map(function(item) { return item.trim(); } );
+  req.body.genres = genres;
+
+  db.Album.create(req.body, function(err, album) {
+    if (err) { console.log('error', err); }
+    console.log(album);
+    res.json(album);
+  });
+  //Matt
+  // console.log("album created", req.body);
+  // var newAlbum = new db.Album(req.body);
+  // newAlbum.save(function newAlbumInDbSaver(err, newAlbum) {
+  //   if (err) {
+  //     return console.log("create error: " + err);
+  //   }
+  //   res.json(newAlbum);
 }
 
 function show(req, res) {

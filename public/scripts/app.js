@@ -44,14 +44,19 @@ $(document).ready(function() {
     });
 });
 
-//this function capture the form values and serializes them
+//this function capture the form values and serializes them, then
 //console.log the data collected from the form submitted
 //clear the form after getting the data
-
-$('#album-form').on('submit', function(evt) {
+//form class form horizontal
+$('#album-form form').on('submit', function(evt) {
   evt.preventDefault();
   var formData = $(this).serialize();
   console.log('formData', formData);
+  //post from app.js
+  $.post('/api/albums', formData, function(album) {
+      console.log('album after POST', album);
+      renderAlbum(album); ///renders to web page (did db save it)
+    });
   $(this).trigger("reset");
 });
 
