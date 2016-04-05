@@ -1,11 +1,12 @@
 // SERVER-SIDE JAVASCRIPT
 
 //require express in our app
-var express = require('express');
+var express = require('express'),
 // generate a new express app and call it 'app'
-var app = express();
+   app = express(),
+   bodyParser = require('body-parser');
 
-var bodyParser = require('body-parser');
+//configure body parser for receiving form data
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // serve static files from public folder

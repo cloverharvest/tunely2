@@ -33,10 +33,16 @@ albums.push({
               genres: [ 'country', 'rock' ]
             });
 
+var db = require('../models');
 
 // GET /api/albums
 function index(req, res) {
-  // FILL ME IN !
+  db.Album.find({}, function(err, albums) {
+    if(err) {
+      return console.log("index error: " + error);
+    }
+    res.json(albums);
+  });
 }
 
 function create(req, res) {
